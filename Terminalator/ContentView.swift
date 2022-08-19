@@ -47,7 +47,14 @@ func moveCursorPos() {
 
 public func openTerminal() {
     if instance != nil {
-        instance?.activate()
+        if((instance?.isHidden) != true){
+            instance?.hide()
+        }else if((instance?.isHidden) != nil) {
+            instance?.unhide()
+        }else{
+            instance = nil
+            openTerminal()
+        }
     } else {
         let url = NSURL(fileURLWithPath: "/System/Applications/Utilities/Terminal.app", isDirectory: true) as URL
         let path = "/bin"
